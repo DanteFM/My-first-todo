@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/todo-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>My first To-Do</title>
+</head>
+<body>
+    <div class="container">
+        <div id="app">
+            <div class="add-task">
+                <input type="text" class="add-task__title" placeholder="Введите новую задачу" v-model="new_task.title">
+                <button @click="add_task()" class="add-task__btn">➕</button>
+            </div>
+            <div class="statistic statistic__actual">
+                <!-- в заголовок передается длина текущего массива -->
+                <h3 class="statistic__title">{{"Текущие задачи: " + tasks_actual.length}}</h3> 
+                <!-- data  -->
+                <!-- v-for цикл, в котором перебирается каждый элемент в указанном массиве и каждому будет прописан свой уникальный индекс. Уникальность индекса утвердит директива :key -->
+                <task @task_delete="delete_task_actual(index)" @task_complete="complete_task(index)" :data="data" v-for="(data, index) in tasks_actual" :key="index"></task>
+            </div>
+            <div class="statistic statistic__done">
+                <h3 class="statistic__title">{{"Выполненные задачи: " + tasks_done.length}}</h3>
+                <task @task_delete="delete_task_done(index)" :data="data" v-for="(data, index) in tasks_done" :key="index"></task>
+            </div>
+        </div>
+        
+    </div>
+</body>
+<script src="js/todo-script.js"></script>
+</html>
