@@ -54,7 +54,9 @@ var vue = new Vue({  //создаем объект Vue и инициализир
             this.tasks_actual.splice(id,1);
         },
         complete_task(id){
-            this.tasks_done.push(this.tasks_actual.pop(id,1));
+            let doneTask = this.tasks_actual[id];
+            this.tasks_done.push(doneTask);
+            this.tasks_actual.splice(id,1);
         },
         add_task(){
             if(this.new_task.title != ''){
